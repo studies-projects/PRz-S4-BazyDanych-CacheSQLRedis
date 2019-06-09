@@ -1,0 +1,15 @@
+Instalation Postgres form Docker:
+	https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198
+	U: postgres
+	P: docker
+	DB: postgres
+	PORT: 5432
+
+Create example database chinook
+	https://stackoverflow.com/questions/39287814/how-to-load-chinook-database-in-postgresql
+
+Chinook scheme:
+	A:\Studia2rok2semestr\Bazy Danych\Laboratoria\BazyDanychI4\Laboratorium\tools\sqlite-sample-database-diagram-color.pdf
+
+Simple NodeJS CRUD
+	https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
