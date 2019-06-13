@@ -7,9 +7,19 @@ Instalation Postgres form Docker:
 
 Create example database chinook
 	https://stackoverflow.com/questions/39287814/how-to-load-chinook-database-in-postgresql
+	dbName: chinook
 
 Chinook scheme:
 	A:\Studia2rok2semestr\Bazy Danych\Laboratoria\BazyDanychI4\Laboratorium\tools\sqlite-sample-database-diagram-color.pdf
 
 Simple NodeJS CRUD
 	https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
+
+ORM Sequelize??
+	https://sequelize.readthedocs.io/en/v3/
+
+sequelize-auto
+	to create automatic database model
+
+TERAZ:
+	Utwórz model tabli w ORM
