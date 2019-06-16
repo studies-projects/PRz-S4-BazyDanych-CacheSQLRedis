@@ -1,9 +1,12 @@
+192.168.0.224
 Instalation Postgres form Docker:
 	https://hackernoon.com/dont-install-postgres-docker-pull-postgres-bee20e200198
 	U: postgres
 	P: docker
 	DB: postgres
 	PORT: 5432
+	command to start docker:
+		docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres
 
 Create example database chinook
 	https://stackoverflow.com/questions/39287814/how-to-load-chinook-database-in-postgresql
@@ -18,8 +21,18 @@ Simple NodeJS CRUD
 ORM Sequelize??
 	https://sequelize.readthedocs.io/en/v3/
 
-sequelize-auto
-	to create automatic database model
+sequelize-auto automatyzacja trzorzenia modelu bazy danych
+	https://github.com/sequelize/sequelize-auto
+	dziala tylko dla starszej wersji
+		npm install -g pg@6.4.2
+		https://stackoverflow.com/questions/51583957/sequelize-auto-typeerror-connection-query-on-is-not-a-function
 
-TERAZ:
-	Utwórz model tabli w ORM
+	sequelize-auto -o "./models" -d chinook -h 192.168.0.224 -u postgres -p 5432 -x docker -e postgres -a sequelize-auto.cfg.js
+
+
+Create introduction point
+	get sql queries:
+		SELECT * FROM film LIMIT 1;
+			http://localhost:3000/query?qu=SELECT * FROM film LIMIT 1;
+		SELECT * FROM actor LIMIT 1;
+			http://localhost:3000/query?qu=SELECT * FROM actor LIMIT 1;

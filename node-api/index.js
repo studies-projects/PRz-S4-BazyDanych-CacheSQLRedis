@@ -10,11 +10,16 @@ var Sequelize = require('sequelize'),
         host: '192.168.0.224',
         port: 5432,
 
-        pool: {
-            max: 5,
-            min: 0,
-            idle: 10000
+        additional: {
+            timestamps: false
+            //...
         },
+
+        // pool: {
+        //     max: 5,
+        //     min: 0,
+        //     idle: 10000
+        // },
     });
 
 sequelize
@@ -25,6 +30,12 @@ sequelize
         console.log('Unable to connect to the database:', err);
     });
 
+// // Sequelize test
+// var actors = sequelize.import("./models/actor.js");
+// actors.findOne().then(function (user) {
+//     console.log(user.get('first_name'));
+// });
+
 app.use(bodyParser.json())
 app.use(
     bodyParser.urlencoded({
@@ -32,9 +43,24 @@ app.use(
     })
 )
 
+app.get('/query', (req, res) => {
+    console.log(`Do query ${req.query.qu}`)
+
+    sequelize.query(req.query.qu, {
+        type: Sequelize.QueryTypes.SELECT
+    }).then(answer => {
+        console.log(answer)
+        res.json(answer)
+    }).catch(err => {
+        console.log(err)
+        res.send(err)
+    })
+})
+
 app.get('/', (request, response) => {
     response.json({ info: 'Node.js, Express and Postres API'})
 })
+
 app.get('/actors', db.getActors)
 
 app.listen(port, () => {
