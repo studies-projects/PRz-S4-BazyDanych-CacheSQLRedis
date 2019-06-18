@@ -36,3 +36,11 @@ Create introduction point
 			http://localhost:3000/query?qu=SELECT * FROM film LIMIT 1;
 		SELECT * FROM actor LIMIT 1;
 			http://localhost:3000/query?qu=SELECT * FROM actor LIMIT 1;
+
+Redis
+	DOCKER: https://markheath.net/post/exploring-redis-with-docker
+
+Put to Redis
+	https://hackernoon.com/using-redis-with-node-js-8d87a48c5dd7
+
+How create live time

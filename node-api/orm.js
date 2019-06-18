@@ -23,7 +23,7 @@ const doQuery = (req, res) => {
     sequelize.query(req.query.qu, {
         type: Sequelize.QueryTypes.SELECT
     }).then(answer => {
-        //console.log(answer)
+        console.log("Answer from doQuery: " + JSON.stringify(answer))
         res.json(answer)
     }).catch(err => {
         console.log(err)
@@ -32,5 +32,7 @@ const doQuery = (req, res) => {
 }
 
 module.exports = {
-    doQuery
+    doQuery,
+    sequelize,
+    Sequelize
 }
