@@ -26,23 +26,22 @@ app.use(
 app.get('/queryORM', orm.doQuery)
 
 app.get('/queryRedis', (req, res) => {
-    let key = cache.queryToKey(req.query.qu)
-    cache.client.get(key, (error, result) => {
+    let key = cache.queryToKey(req.query.qu) //parse sql query to key
+    cache.client.get(key, (error, result) => { 
         if(error) {
             console.log(error)
             throw error
         }
-        if (result != null) {
+        if (result != null) { //if key exist return from redit
             console.log('Results from REDIS')
             res.json(JSON.parse(result))
         } else {
             orm.sequelize.query(req.query.qu, {
                 type: orm.Sequelize.QueryTypes.SELECT
             }).then(answer => {
-                var min2 = req.query.time;
+                var time = req.query.time;
                 console.log('Results from Postgres')
-                cache.client.set(key,JSON.stringify(answer), 'EX', min2, cache.redis.print)
-                console.log(`TEST Key: ${key}`)
+                cache.client.set(key,JSON.stringify(answer), 'EX', time, cache.redis.print) //add key to Redis
                 res.json(answer)
             }).catch(err => {
                 console.log(err)
