@@ -26,14 +26,13 @@ app.use(
 app.get('/queryORM', orm.doQuery)
 
 app.get('/queryRedis', (req, res) => {
-
-    var k = cache.queryToKey(req.query.qu)
-    cache.client.get(k, (error, result) => {
+    let key = cache.queryToKey(req.query.qu)
+    cache.client.get(key, (error, result) => {
         if(error) {
             console.log(error)
             throw error
         }
-        if (result != null){
+        if (result != null) {
             console.log('Results from REDIS')
             res.json(JSON.parse(result))
         } else {
@@ -42,9 +41,8 @@ app.get('/queryRedis', (req, res) => {
             }).then(answer => {
                 var min2 = req.query.time;
                 console.log('Results from Postgres')
-                cache.client.set(k,JSON.stringify(answer), 'EX', min2, cache.redis.print)
-                console.log(`TEST Key: ${k}`)
-                //cache.client.expireat(k, min2)
+                cache.client.set(key,JSON.stringify(answer), 'EX', min2, cache.redis.print)
+                console.log(`TEST Key: ${key}`)
                 res.json(answer)
             }).catch(err => {
                 console.log(err)
@@ -52,18 +50,34 @@ app.get('/queryRedis', (req, res) => {
             })
         }
     })
-
-
-    
 })
 
-// client.set('my-key','VALUES123', redis.print)
-// client.get('my-key', (error, result) => {
-//     if(error) {
-//         console.log(error)
-//         throw error
-//     }
-//     console.log('Get results ->' + result)
+// app.get('/queryRedis', (req, res) => {
+//     var k = cache.queryToKey(req.query.qu)
+//     cache.client.get(k, (error, result) => {
+//         if(error) {
+//             console.log(error)
+//             throw error
+//         }
+//         if (result != null){
+//             console.log('Results from REDIS')
+//             res.json(JSON.parse(result))
+//         } else {
+//             orm.sequelize.query(req.query.qu, {
+//                 type: orm.Sequelize.QueryTypes.SELECT
+//             }).then(answer => {
+//                 var min2 = req.query.time;
+//                 console.log('Results from Postgres')
+//                 cache.client.set(k,JSON.stringify(answer), 'EX', min2, cache.redis.print)
+//                 console.log(`TEST Key: ${k}`)
+//                 //cache.client.expireat(k, min2)
+//                 res.json(answer)
+//             }).catch(err => {
+//                 console.log(err)
+//                 res.send(err)
+//             })
+//         }
+//     })
 // })
 
 app.get('/', (request, response) => {

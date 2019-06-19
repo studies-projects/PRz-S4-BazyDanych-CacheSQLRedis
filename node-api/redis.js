@@ -19,8 +19,23 @@ var queryToKey = (query) => {
     return r
 }
 
+var getFromRedis = (key) => {
+    client.get(key, (error, result) => {
+        if(error) {
+            console.log(error)
+            throw error
+        } 
+        console.log("RESPONSE in get: " + result)
+        
+        return result
+    })
+    console.log("RESPONSE outside get: " + result)
+
+}
+
 module.exports = {
     queryToKey,
+    getFromRedis,
     client,
     redis
 }
